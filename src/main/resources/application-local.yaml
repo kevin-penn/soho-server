@@ -1,0 +1,43 @@
+server:
+  port: 8080
+  servlet:
+    session:
+      cookie:
+        name: SOHOID
+  http2:
+    enabled: false
+  error:
+    whitelabel:
+      enabled: false
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/start_soho
+    username: root
+    password: 123456
+  web:
+    resources:
+      add-mappings: false
+  security:
+    filter:
+      order: 10
+  main:
+    banner-mode: off
+
+mybatis:
+  mapper-locations: classpath:/META-INFO/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    root: info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: env,beans,httptrace,metrics,threaddump
+
+sohoapp:
+  security:
+    permit-ant-partents: not-use
