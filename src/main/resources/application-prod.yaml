@@ -10,8 +10,3 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/start_soho
     username: ${JDBC_UNAME}
     password: ${JDBC_PASSWD}
-
-mybatis:
-  mapper-locations: classpath:/META-INFO/mapper/**/*.xml
-  configuration:
-    map-underscore-to-camel-case: true

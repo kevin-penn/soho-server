@@ -14,9 +14,9 @@ class SohoApplicationTests {
     @Test
     void contextLoads() {
 
-        //System.out.println(userDao.queryCustom());
+        System.out.println(userDao.queryCustom());
         //System.out.println(userDao.findById(100L));
-        System.out.println(userDao.findUserByEmail("u1@t.com"));
+        //System.out.println(userDao.findUserByEmail("u1@t.com"));
 
     }
 

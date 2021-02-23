@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public interface UserRepo extends PagingAndSortingRepository<User, Long> {
 
-    @Query(value = "select * from `user` where tid='100'")
-    User queryCustom();
+    @Query(value = UserRepoSql.CUSTOM_SQL)
+    Optional<User> queryCustom();
 
     Optional<User> findUserByEmail(String email);
 

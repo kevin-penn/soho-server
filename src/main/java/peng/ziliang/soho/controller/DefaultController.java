@@ -47,4 +47,9 @@ public class DefaultController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+
+    @GetMapping("/test")
+    public ResponseEntity<User> test() {
+        return ResponseEntity.ok().body(userRepo.queryCustom().get());
+    }
 }

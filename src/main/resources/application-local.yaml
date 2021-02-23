@@ -23,11 +23,6 @@ spring:
   main:
     banner-mode: off
 
-mybatis:
-  mapper-locations: classpath:/META-INFO/mapper/**/*.xml
-  configuration:
-    map-underscore-to-camel-case: true
-
 logging:
   level:
     root: info
