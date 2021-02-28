@@ -16,8 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import static org.springframework.util.ObjectUtils.isEmpty;
-
 @Component
 public class JwtTokenFilter extends OncePerRequestFilter {
 
@@ -36,22 +34,17 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                                     FilterChain chain)
             throws ServletException, IOException {
         // Get authorization header and validate
-        final String header = request.getHeader(HttpHeaders.AUTHORIZATION);
-        if (isEmpty(header) || !header.startsWith("Bearer ")) {
-            chain.doFilter(request, response);
-            return;
-        }
+        final String token = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-        // Get jwt token and validate
-        final String token = header.split(" ")[1].trim();
         if (!jwtTokenUtil.validate(token)) {
             chain.doFilter(request, response);
             return;
         }
 
         // Get user identity and set it on the spring security context
+        String userEmail = jwtTokenUtil.getUsername(token);
         UserDetails userDetails = userRepo
-                .findUserByEmail(jwtTokenUtil.getUsername(token))
+                .findUserByEmail(userEmail)
                 .orElse(null);
 
         UsernamePasswordAuthenticationToken

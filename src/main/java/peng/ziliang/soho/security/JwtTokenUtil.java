@@ -20,7 +20,7 @@ public class JwtTokenUtil {
 
     public String generateAccessToken(User user) {
         return Jwts.builder()
-                .setSubject(format("%s,%s", user.getTid(), user.getLoginName()))
+                .setSubject(format("%s,%s", user.getTid(), user.getEmail()))
                 .setIssuer(jwtIssuer)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000)) // 1 week

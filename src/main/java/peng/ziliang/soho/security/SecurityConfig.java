@@ -71,10 +71,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();
 
         // Add JWT token filter
-//        http.addFilterBefore(
-//                jwtTokenFilter,
-//                UsernamePasswordAuthenticationFilter.class
-//        );
+        http.addFilterBefore(
+                jwtTokenFilter,
+                UsernamePasswordAuthenticationFilter.class
+        );
 
     }
 

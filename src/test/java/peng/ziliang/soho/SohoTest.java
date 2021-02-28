@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import peng.ziliang.soho.repository.UserRepo;
 
 @SpringBootTest
-class SohoApplicationTests {
+class SohoTest {
 
     @Autowired
     UserRepo userDao;
