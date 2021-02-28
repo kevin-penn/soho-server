@@ -1,12 +1,6 @@
 package peng.ziliang.soho.security;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.SignatureException;
-import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -21,8 +15,8 @@ import static java.lang.String.format;
 @RequiredArgsConstructor
 public class JwtTokenUtil {
 
-    private final String jwtSecret = "zdtlD3JK56m6wTTgsNFhqzjqP";
-    private final String jwtIssuer = "example.io";
+    private final String jwtSecret = "zdtlD3JK56m6wTTgsNFhqzjqP7ju95bCwhWYa9HFPR8p63x24Ku5w5kNVe2PbVMfYaun5NTXo9xWSKu18jwPsBwm6wTTgs";
+    private final String jwtIssuer = "zilianp.io";
 
     public String generateAccessToken(User user) {
         return Jwts.builder()

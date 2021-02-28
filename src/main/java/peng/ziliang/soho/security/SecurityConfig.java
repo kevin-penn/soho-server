@@ -11,6 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -23,12 +24,12 @@ import static java.lang.String.format;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserRepo userRepo;
     private final JwtTokenFilter jwtTokenFilter;
 
-    public WebSecurityConfig(UserRepo userRepo, JwtTokenFilter jwtTokenFilter) {
+    public SecurityConfig(UserRepo userRepo, JwtTokenFilter jwtTokenFilter) {
         this.userRepo = userRepo;
         this.jwtTokenFilter = jwtTokenFilter;
     }
@@ -57,6 +58,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // Set permissions on endpoints
         http.authorizeRequests()
+                // Swagger
+                .antMatchers("/swagger-ui/**").permitAll()
+                .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/swagger-resources/**").permitAll()
+                .antMatchers("/v2/*").permitAll()
+                .antMatchers("/csrf").permitAll()
+                .antMatchers("/").permitAll()
                 // Our public endpoints
                 .antMatchers(URLPrefix.API_PUBLIC + "/**").permitAll()
                 // Our private endpoints
@@ -81,9 +89,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 ));
     }
 
-    // Used by spring security if CORS is enabled.
     @Bean
     public CorsFilter corsFilter() {
+
+        // Used by spring security if CORS is enabled.
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
