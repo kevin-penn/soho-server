@@ -1,6 +1,7 @@
 package peng.ziliang.soho.controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,7 @@ public class AuthController {
         this.jwtTokenUtil = jwtTokenUtil;
     }
 
+    @ApiOperation(value = "登陆")
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody @Valid AuthRequest request) {
 

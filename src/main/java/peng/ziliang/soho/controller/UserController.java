@@ -1,6 +1,7 @@
 package peng.ziliang.soho.controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,7 +17,7 @@ import peng.ziliang.soho.security.JwtTokenUtil;
 
 @Api(tags = "用户管理")
 @RestController
-@RequestMapping(URLPrefix.API_PRIV)
+@RequestMapping(URLPrefix.API_PRIV_USER)
 public class UserController {
 
     private final AuthenticationManager authenticationManager;
@@ -29,8 +30,9 @@ public class UserController {
         this.userRepo = userRepo;
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<UserVO> test() {
+    @ApiOperation(value = "用户基本信息")
+    @GetMapping("/info")
+    public ResponseEntity<UserVO> info() {
 
         User user = userRepo.queryCustom().get();
 
